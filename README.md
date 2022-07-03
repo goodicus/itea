@@ -23,9 +23,9 @@ For Linux:
 Then call the building step:
 (Note: if you don't need test projects in your solution - set -DENABLE_UNIT_TESTS=OFF, or simply remove it)
 ```sh
-cmake -B *path/to/build/dir* -S *path/to/source/dir* -DBUILD_TESTS=ON -DCMAKE_TOOLCHAIN_FILE=*path/to/vcpkg.cmake*
+cmake -B *path/to/build/dir* -S *path/to/source/dir* --DWITH_GOOGLE_TEST=ON -DCMAKE_TOOLCHAIN_FILE=*path/to/vcpkg.cmake*
 ```
 Example (Windows):
 ```sh
-cmake -B ./.build -S . -DCMAKE_TOOLCHAIN_FILE=d:/development/vcpkg/scripts/buildsystems/vcpkg.cmake
+cmake -B ./.build -S . -DCMAKE_TOOLCHAIN_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake -DWITH_GOOGLE_TEST=ON
 ```
