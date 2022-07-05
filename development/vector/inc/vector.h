@@ -13,7 +13,7 @@ class vector
 
     ~vector() = default;
 
-    //T* front();
+    T* front();
 
     size_t size() const;
     size_t capacity() const;
@@ -26,6 +26,17 @@ class vector
     size_t capacity_ {0};
     T* storage_ = nullptr;
 };
+
+template<class T>
+T* asg::vector<T>::front()
+{
+    if (empty())
+    {
+        return nullptr;
+    }
+
+    return &storage_[ 0 ];
+}
 
 template<class T>
 asg::vector<T>::vector(size_t count /*= 0*/)

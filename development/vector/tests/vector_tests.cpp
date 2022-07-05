@@ -113,4 +113,23 @@ TEST(Empty, Init_size_10)
     vector<int> v_int(init_size);
     EXPECT_FALSE(v_int.empty());
 }
+
+TEST(Front, empty)
+{
+    constexpr size_t init_size {0};
+    vector<int> v_int(init_size);
+    EXPECT_EQ(v_int.size(), init_size);
+
+    EXPECT_EQ(v_int.front(), nullptr);
+}
+
+TEST(Front, One_element)
+{
+    constexpr std::initializer_list<int> il_ {1};
+    constexpr size_t init_size = il_.size();
+    vector v_int(il_);
+
+    EXPECT_EQ(v_int.size(), init_size);
+    EXPECT_EQ(*v_int.front(), *il_.begin());
+}
 } // namespace asg::tests
