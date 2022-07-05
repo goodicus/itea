@@ -1,10 +1,10 @@
 #include "vector.h"
 
+#include <gmock/gmock-matchers.h>
 #include <gtest/gtest.h>
 
 namespace asg::tests
 {
-
 TEST(Constructor_and_size, Init_size_0)
 {
     constexpr size_t init_size {0};
@@ -57,7 +57,11 @@ TEST(Initializer_list_and_size, Init_size_1)
         std::initializer_list il_ {0};
         const auto init_size {il_.size()};
         vector<int> v_int(il_);
+
+        const std::vector<int> expected_v(il_);
         EXPECT_EQ(v_int.size(), init_size);
+        // TODO Implement necessary methods to be able to verify vector content
+        // EXPECT_THAT(v_int, ::testing::ContainerEq(expected_v));
     }
     {
         std::initializer_list il_ {0, 1};

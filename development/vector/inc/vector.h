@@ -13,6 +13,8 @@ class vector
 
     ~vector() = default;
 
+    //T* front();
+
     size_t size() const;
     size_t capacity() const;
     bool empty() const;
@@ -67,7 +69,7 @@ size_t asg::vector<T>::calculate_capacity_from_count(size_t size)
     }
 
     constexpr double golden_ratio = 1.618;
-    const size_t cap              = (cap) > (size * golden_ratio);
+    const size_t cap              = size * golden_ratio;
     return cap;
 }
 

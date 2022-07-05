@@ -41,9 +41,11 @@ target_include_directories(${PROJECT_LIB_NAME}
 
     target_link_libraries(${PROJECT_TESTS_NAME}
         PRIVATE
+            ${PROJECT_LIB_NAME}
+            GTest::gmock
+            GTest::gmock_main
             GTest::gtest
             GTest::gtest_main
-            ${PROJECT_LIB_NAME}
     )
 endif()
 
