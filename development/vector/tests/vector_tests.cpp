@@ -1,10 +1,10 @@
 #include "vector.h"
 
+#include <gmock/gmock-matchers.h>
 #include <gtest/gtest.h>
 
 namespace asg::tests
 {
-
 TEST(Constructor_and_size, Init_size_0)
 {
     constexpr size_t init_size {0};
@@ -57,7 +57,11 @@ TEST(Initializer_list_and_size, Init_size_1)
         std::initializer_list il_ {0};
         const auto init_size {il_.size()};
         vector<int> v_int(il_);
+
+        const std::vector<int> expected_v(il_);
         EXPECT_EQ(v_int.size(), init_size);
+        // TODO Implement necessary methods to be able to verify vector content
+        // EXPECT_THAT(v_int, ::testing::ContainerEq(expected_v));
     }
     {
         std::initializer_list il_ {0, 1};
@@ -108,5 +112,53 @@ TEST(Empty, Init_size_10)
 
     vector<int> v_int(init_size);
     EXPECT_FALSE(v_int.empty());
+}
+
+TEST(Front, empty)
+{
+    constexpr size_t init_size {0};
+    vector<int> v_int(init_size);
+    EXPECT_EQ(v_int.size(), init_size);
+
+    EXPECT_EQ(v_int.front(), nullptr);
+}
+
+TEST(Front, One_element)
+{
+    constexpr std::initializer_list<int> il_ {1};
+    constexpr size_t init_size = il_.size();
+    vector v_int(il_);
+
+    EXPECT_EQ(v_int.size(), init_size);
+    EXPECT_EQ(*v_int.front(), *il_.begin());
+}
+
+TEST(Back, empty)
+{
+    constexpr size_t init_size {0};
+    vector<int> v_int(init_size);
+    EXPECT_EQ(v_int.size(), init_size);
+
+    EXPECT_EQ(v_int.back(), nullptr);
+}
+
+TEST(Back, Two_elements)
+{
+    constexpr std::initializer_list<int> il_ {1, 2};
+    constexpr size_t init_size = il_.size();
+    vector v_int(il_);
+
+    EXPECT_EQ(v_int.size(), init_size);
+    EXPECT_EQ(*v_int.back(), *(il_.begin() + 1));
+}
+
+TEST(Front_Back, One_element)
+{
+    constexpr std::initializer_list<int> il_ {1};
+    constexpr size_t init_size = il_.size();
+    vector v_int(il_);
+
+    EXPECT_EQ(v_int.size(), init_size);
+    EXPECT_EQ(*v_int.back(), *il_.begin());
 }
 } // namespace asg::tests

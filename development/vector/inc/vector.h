@@ -13,6 +13,9 @@ class vector
 
     ~vector() = default;
 
+    T* front();
+    T* back();
+
     size_t size() const;
     size_t capacity() const;
     bool empty() const;
@@ -24,6 +27,28 @@ class vector
     size_t capacity_ {0};
     T* storage_ = nullptr;
 };
+
+template<class T>
+T* asg::vector<T>::back()
+{
+    if(empty())
+    {
+        return nullptr;
+    }
+
+    return &storage_[ size_ - 1 ];
+}
+
+template<class T>
+T* asg::vector<T>::front()
+{
+    if(empty())
+    {
+        return nullptr;
+    }
+
+    return &storage_[ 0 ];
+}
 
 template<class T>
 asg::vector<T>::vector(size_t count /*= 0*/)
@@ -67,7 +92,7 @@ size_t asg::vector<T>::calculate_capacity_from_count(size_t size)
     }
 
     constexpr double golden_ratio = 1.618;
-    const size_t cap              = (cap) > (size * golden_ratio);
+    const size_t cap              = size * golden_ratio;
     return cap;
 }
 
