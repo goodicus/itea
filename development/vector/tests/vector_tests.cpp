@@ -132,4 +132,33 @@ TEST(Front, One_element)
     EXPECT_EQ(v_int.size(), init_size);
     EXPECT_EQ(*v_int.front(), *il_.begin());
 }
+
+TEST(Back, empty)
+{
+    constexpr size_t init_size {0};
+    vector<int> v_int(init_size);
+    EXPECT_EQ(v_int.size(), init_size);
+
+    EXPECT_EQ(v_int.back(), nullptr);
+}
+
+TEST(Back, Two_elements)
+{
+    constexpr std::initializer_list<int> il_ {1, 2};
+    constexpr size_t init_size = il_.size();
+    vector v_int(il_);
+
+    EXPECT_EQ(v_int.size(), init_size);
+    EXPECT_EQ(*v_int.back(), *(il_.begin() + 1));
+}
+
+TEST(Front_Back, One_element)
+{
+    constexpr std::initializer_list<int> il_ {1};
+    constexpr size_t init_size = il_.size();
+    vector v_int(il_);
+
+    EXPECT_EQ(v_int.size(), init_size);
+    EXPECT_EQ(*v_int.back(), *il_.begin());
+}
 } // namespace asg::tests
